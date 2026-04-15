@@ -9,11 +9,11 @@ A fun, interactive Spider-Man themed website with music, scroll-triggered questi
 ```
 my web/
 ├── index.html          # Main HTML file
-├── style.css           # All styling & animations
+├── styles.css          # All styling & animations
 ├── script.js           # Interactivity logic
-├── assets/             # ⚠️ YOU NEED TO CREATE THIS
-│   ├── spiderman.mp4   # ⚠️ Add your Spider-Man video here
-│   └── sunflower.mp3   # ⚠️ Add your Sunflower music here
+├── assets/             # ⚠️ ASSETS FOLDER
+│   ├── spiderverse-video.mp4 # Background video
+│   └── gwen-quote.mp4        # (Optional) Quote video
 └── README.md           # This file
 ```
 
@@ -27,15 +27,8 @@ my web/
 ### Step 2: Add Your Media Files
 
 **For the Video Background:**
-- Find a Spider-Man video (MP4 format works best)
-- Rename it to `spiderman.mp4`
-- Place it in the `assets` folder
-- 💡 Tip: Use a looping video or short clip (5-15 seconds) for best results
-
-**For the Music:**
-- Find the "Sunflower" song (MP3 format)
-- Rename it to `sunflower.mp3`
-- Place it in the `assets` folder
+- Place your video in the `assets` folder.
+- Rename it to `spiderverse-video.mp4`.
 
 ### Step 3: Open the Website
 - Double-click `index.html` to open in your browser
@@ -47,13 +40,13 @@ my web/
 
 | Feature | Description |
 |---------|-------------|
-| 🎵 **Music Player** | Click the button in top-right to play/pause Sunflower |
-| 🕷️ **Video Background** | Spider-Man video loops behind all content |
-| 📜 **Scroll Animations** | Questions fade in as you scroll down |
-| ✅ **Q1 Multi-Select** | Click any or all of the 3 options |
-| 🎭 **Q2 Fake Options** | Only 1 correct answer, others are disabled |
-| 🏃 **Running No Button** | Try to click "No" - it runs away! |
-| 🎉 **Konami Code** | Enter ↑↑↓↓←→←→BA for a surprise! |
+| 🎵 **Active Audio** | Tap play to hear the Sunflower Spider-Verse Mix (Local) |
+| 🕷️ **Animated Hero** | Interactive Spider-Man intro that reacts to your stay |
+| 📜 **Scroll Vibe** | Real-time Vibe Meter that tracks your dimension status |
+| ✅ **Quiz Logic** | Hidden paths and "Wrong Timeline" bans for fake options |
+| 🏃 **Runner Button** | The "No" button that has a mind of its own |
+| 🕸️ **Web Cursor** | Custom web-slinger cursor with physics-based pulls |
+| 🎉 **Canon Event** | Enter ↑↑↓↓←→←→BA for a **Dimension Shift** (Surprise!) |
 
 ---
 

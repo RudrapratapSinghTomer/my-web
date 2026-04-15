@@ -7,6 +7,8 @@ let hasVisitedIntro = sessionStorage.getItem('spiderIntroVisited');
 const RESPONSE_STORAGE_KEY = 'spiderVerseQuizResponses';
 const VIDEO_URL = 'assets/spiderverse-video.mp4';
 const GWEN_QUOTE_VIDEO = 'assets/gwen-quote.mp4';
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiBuffer = [];
 const SPIDER_NO_LINES = [
     'Spider-Sense says that No was a canon event cancellation attempt.',
     'Miles just swung off with that button before you could click it.',
@@ -26,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMediaState();
     initializeVideoPlayer();
     initializeIntroSlide();
+    initializeKonamiCode();
+    initializeCustomCursor();
     renderResponses();
 });
 
@@ -206,10 +210,31 @@ function showGwenQuote() {
     if (gwenQuoteVideo) {
         gwenQuoteVideo.muted = false;
         gwenQuoteVideo.play().catch(() => {
-            // Auto-play might be blocked, user needs to interact first
+            // Auto-play might be blocked or file missing
             gwenQuoteVideo.muted = true;
-            gwenQuoteVideo.play().catch(() => {});
+            gwenQuoteVideo.play().catch(() => {
+                showGwenFallback();
+            });
         });
+
+        // Error listener for missing file
+        gwenQuoteVideo.addEventListener('error', showGwenFallback);
+    }
+}
+
+function showGwenFallback() {
+    const container = document.getElementById('gwenQuoteContainer');
+    if (!container) return;
+    
+    // Replace video shell with a stylized card
+    const shell = container.querySelector('.gwen-quote-video-shell');
+    if (shell) {
+        shell.innerHTML = `
+            <div class="gwen-quote-fallback">
+                <p class="gwen-quote-text">"In every other universe, Gwen Stacy falls for Spider-Man. And in every other universe, it doesn't end well."</p>
+                <p class="gwen-quote-text-2">"Well, there's a first time for everything. Right?"</p>
+            </div>
+        `;
     }
 }
 
@@ -576,4 +601,71 @@ function exportResponses() {
 function clearResponses() {
     window.localStorage.removeItem(RESPONSE_STORAGE_KEY);
     renderResponses();
+}
+
+/**
+ * KONAMI CODE & DIMENSION SHIFT
+ */
+function initializeKonamiCode() {
+    document.addEventListener('keydown', (e) => {
+        konamiBuffer.push(e.key);
+        konamiBuffer = konamiBuffer.slice(-KONAMI_CODE.length);
+        
+        if (konamiBuffer.join('').toLowerCase() === KONAMI_CODE.join('').toLowerCase()) {
+            triggerDimensionShift();
+            konamiBuffer = [];
+        }
+    });
+}
+
+function triggerDimensionShift() {
+    document.body.classList.add('glitch-active');
+    setTimeout(() => {
+        document.body.classList.toggle('dimension-shift');
+        document.body.classList.remove('glitch-active');
+        
+        // Play a glitchy sound or log a message
+        console.log("Dimension Anomaly Detected: Canon Event Interrupted.");
+        
+        // Update some UI text for the surprise
+        const kicker = document.querySelector('.warning-kicker');
+        if (kicker) kicker.textContent = "Multi-Verse Anomaly";
+    }, 400);
+}
+
+/**
+ * CUSTOM WEB CURSOR
+ */
+function initializeCustomCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+    });
+
+    document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+    document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+
+    // Optional: Web Pull effect on click
+    document.addEventListener('click', (e) => {
+        createWebPull(e.clientX, e.clientY);
+    });
+}
+
+function createWebPull(x, y) {
+    const web = document.createElement('div');
+    web.className = 'web-pull';
+    web.style.left = `${x}px`;
+    web.style.top = `0px`;
+    web.style.height = `${y}px`;
+    document.body.appendChild(web);
+    
+    setTimeout(() => {
+        web.style.transform = 'scaleY(0)';
+        web.style.opacity = '0';
+        setTimeout(() => web.remove(), 400);
+    }, 100);
 }

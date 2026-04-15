@@ -9,6 +9,18 @@
     --blue: #33a6ff;
     --yellow: #ffd447;
     --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    --glitch-offset: 0px;
+}
+
+body.dimension-shift {
+    --bg: #050005;
+    --panel: rgba(15, 0, 20, 0.85);
+    --panel-strong: rgba(10, 0, 15, 0.95);
+    --red: #8b00ff; /* Electric Purple */
+    --blue: #39ff14; /* Neon Green */
+    --yellow: #ff00ff; /* Magenta */
+    --text: #e0e0e0;
+    --shadow: 0 24px 80px rgba(139, 0, 255, 0.25);
 }
 
 * {
@@ -326,6 +338,31 @@ footer {
     top: 18px;
     right: 18px;
     z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.music-banner {
+    background: linear-gradient(135deg, var(--red), #ff6a00);
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 4px 4px 0 var(--blue);
+    transform: rotate(-2deg);
+    animation: bannerPulse 2s infinite ease-in-out;
+    cursor: default;
+    user-select: none;
+}
+
+@keyframes bannerPulse {
+    0%, 100% { transform: rotate(-2deg) scale(1); }
+    50% { transform: rotate(1deg) scale(1.05); }
 }
 
 .music-player {
@@ -1088,6 +1125,79 @@ body.show-ban-cursor * {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* Dimension Shift Glitch Effects */
+.glitch-active {
+    animation: masterGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes masterGlitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-4px, 4px); filter: hue-rotate(90deg); }
+    40% { transform: translate(-4px, -4px); filter: hue-rotate(180deg); }
+    60% { transform: translate(4px, 4px); filter: hue-rotate(270deg); }
+    80% { transform: translate(4px, -4px); filter: hue-rotate(360deg); }
+    100% { transform: translate(0); }
+}
+
+.dimension-shift .warning-title {
+    text-shadow:
+        4px 4px 0 var(--red),
+        -4px -4px 0 var(--blue);
+    animation: pitalGlitch 3s infinite;
+}
+
+@keyframes pitalGlitch {
+    0%, 100% { clip-path: inset(0 0 0 0); }
+    20% { clip-path: inset(20% 0 40% 0); transform: translateX(-5px); }
+    40% { clip-path: inset(60% 0 10% 0); transform: translateX(5px); }
+    60% { clip-path: inset(10% 0 70% 0); transform: translateX(-2px); }
+    80% { clip-path: inset(40% 0 30% 0); transform: translateX(2px); }
+}
+
+/* Custom Web Cursor */
+.custom-cursor {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transition: transform 0.1s ease-out, opacity 0.3s ease;
+    display: none;
+}
+
+@media (pointer: fine) {
+    .custom-cursor { display: block; }
+}
+
+.custom-cursor.clicking {
+    transform: scale(0.7);
+    background: var(--red);
+}
+
+.web-pull {
+    position: absolute;
+    width: 2px;
+    background: white;
+    transform-origin: top;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.6;
+}
+
+/* Fallback Quote Card */
+.gwen-quote-fallback {
+    padding: 40px;
+    background: var(--panel-strong);
+    border: 2px solid var(--blue);
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(51, 166, 255, 0.2);
 }
 
 /* Responsive */
