@@ -1,0 +1,21 @@
+# ⚠️ ADD YOUR MEDIA FILES HERE
+
+## Required Files:
+
+1. **spiderman.mp4** - Your Spider-Man video for background
+   - Format: MP4
+   - Recommended: Short looping clip (5-15 seconds)
+   - Size: Keep under 10MB for best performance
+
+2. **sunflower.mp3** - Your Sunflower music file
+   - Format: MP3
+   - Any quality works
+   - Recommended: Under 5MB
+
+## Where to Get Them:
+
+- Use your own legally obtained files
+- Or find royalty-free alternatives
+
+## After Adding Files:
+Delete this PLACEHOLDER.txt file (optional)

@@ -1,0 +1,412 @@
+/* ========================================
+   SPIDER-MAN EXPERIENCE - STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: #0a0a0a;
+}
+
+/* ========================================
+   VIDEO BACKGROUND
+   ======================================== */
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(186, 23, 40, 0.2) 0%,
+        rgba(10, 10, 30, 0.7) 50%,
+        rgba(23, 107, 186, 0.2) 100%
+    );
+    z-index: -1;
+    animation: overlayShift 10s ease-in-out infinite;
+}
+
+@keyframes overlayShift {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* ========================================
+   MUSIC CONTROL
+   ======================================== */
+
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.music-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(186, 23, 40, 0.8);
+    border: 2px solid #ba1728;
+    border-radius: 50px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(186, 23, 40, 0.4);
+}
+
+.music-btn:hover {
+    background: rgba(186, 23, 40, 1);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(186, 23, 40, 0.6);
+}
+
+.music-btn.playing {
+    background: rgba(23, 107, 186, 0.8);
+    border-color: #176bba;
+    box-shadow: 0 4px 15px rgba(23, 107, 186, 0.4);
+}
+
+.music-btn .icon {
+    font-size: 18px;
+    animation: none;
+}
+
+.music-btn.playing .icon {
+    animation: musicBeat 0.8s ease-in-out infinite;
+}
+
+@keyframes musicBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   QUESTION CARDS
+   ======================================== */
+
+.question-card {
+    background: rgba(10, 10, 30, 0.85);
+    border: 1px solid rgba(186, 23, 40, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.question {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    text-shadow: 0 2px 10px rgba(186, 23, 40, 0.5);
+}
+
+/* ========================================
+   OPTIONS
+   ======================================== */
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    padding: 18px 25px;
+    background: linear-gradient(135deg, rgba(186, 23, 40, 0.3) 0%, rgba(23, 107, 186, 0.3) 100%);
+    border: 2px solid rgba(186, 23, 40, 0.5);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.option-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(186, 23, 40, 0.6) 0%, rgba(23, 107, 186, 0.6) 100%);
+    border-color: #ba1728;
+    transform: translateX(10px);
+    box-shadow: 0 5px 20px rgba(186, 23, 40, 0.4);
+}
+
+.option-btn.selected {
+    background: linear-gradient(135deg, rgba(186, 23, 40, 0.8) 0%, rgba(186, 23, 40, 0.5) 100%);
+    border-color: #ba1728;
+    box-shadow: 0 0 20px rgba(186, 23, 40, 0.6);
+}
+
+.option-btn .emoji {
+    font-size: 24px;
+}
+
+/* Fake Options - Non-clickable */
+.option-btn.fake-option {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(50, 50, 50, 0.3);
+    border-color: rgba(100, 100, 100, 0.3);
+}
+
+.option-btn.fake-option:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Correct Answer Styling */
+.option-btn.correct-answer {
+    border-color: rgba(23, 186, 107, 0.6);
+    background: linear-gradient(135deg, rgba(23, 186, 107, 0.3) 0%, rgba(23, 107, 186, 0.3) 100%);
+}
+
+.option-btn.correct-answer:hover {
+    border-color: #17ba6b;
+    box-shadow: 0 5px 20px rgba(23, 186, 107, 0.4);
+}
+
+.hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* ========================================
+   ANSWER REVEAL (Q3)
+   ======================================== */
+
+.answer-reveal {
+    padding: 20px;
+}
+
+.answer-text {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.answer-text .highlight {
+    color: #ba1728;
+    font-weight: 600;
+    font-size: 22px;
+    display: block;
+    margin-top: 20px;
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(186, 23, 40, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(186, 23, 40, 0.8), 0 0 30px rgba(186, 23, 40, 0.4);
+    }
+}
+
+/* ========================================
+   FINAL CARD - YES/NO
+   ======================================== */
+
+.final-card {
+    border-color: rgba(186, 23, 40, 0.6);
+    box-shadow: 0 0 50px rgba(186, 23, 40, 0.3);
+}
+
+.final-question {
+    font-size: 32px;
+    color: #ba1728;
+    animation: pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.yes-no-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    position: relative;
+    min-height: 80px;
+}
+
+.yes-btn, .no-btn {
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, #17ba6b 0%, #176bba 100%);
+    color: white;
+    box-shadow: 0 5px 20px rgba(23, 186, 107, 0.4);
+}
+
+.yes-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(23, 186, 107, 0.6);
+}
+
+.no-btn {
+    background: linear-gradient(135deg, #ba1728 0%, #8b0f1a 100%);
+    color: white;
+    box-shadow: 0 5px 20px rgba(186, 23, 40, 0.4);
+    position: relative;
+}
+
+.no-btn:hover {
+    box-shadow: 0 8px 30px rgba(186, 23, 40, 0.6);
+}
+
+/* ========================================
+   SCROLL INDICATOR
+   ======================================== */
+
+.scroll-indicator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 100;
+}
+
+.scroll-indicator::after {
+    content: '↓';
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .question {
+        font-size: 22px;
+    }
+
+    .question-card {
+        padding: 30px 20px;
+    }
+
+    .option-btn {
+        padding: 15px 18px;
+        font-size: 14px;
+    }
+
+    .yes-no-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .music-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+}

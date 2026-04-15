@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Spider-Verse Vibe Check</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-backdrop">
+        <div class="gradient-bg"></div>
+        <div class="comic-grid"></div>
+        <div class="sparkles" id="sparkles"></div>
+        <div class="petals" id="petals"></div>
+        <div class="floating-emojis" id="floatingEmojis"></div>
+    </div>
+
+    <div class="ban-tooltip" id="banTooltip">Nope. Wrong timeline.</div>
+
+    <div class="music-section">
+        <div class="music-player" id="musicPlayer">
+            <div class="music-icon" id="musicIcon">SPDR</div>
+            <div class="music-info">
+                <span class="music-title">Sunflower Spider-Verse Mix</span>
+                <span class="music-artist" id="musicStatus">Tap play for sound</span>
+            </div>
+            <button class="play-btn" type="button" onclick="toggleMusic()" id="playBtn" aria-label="Play or pause music">Play</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <p class="warning-kicker">Dimension Alert</p>
+                <h1 class="warning-title">Warning, Proceed With Caution</h1>
+                <p class="warning-text">
+                    This page is fully infected with Spider-Verse energy, dramatic choices, and questionable rizz.
+                    Enter only if you are ready for a vibe check across the multiverse.
+                </p>
+                <div class="hero-actions">
+                    <button class="hero-btn" type="button" onclick="scrollToQuiz()">Enter the Quiz</button>
+                    <p class="scroll-note">Scroll down to continue</p>
+                </div>
+            </div>
+
+            <div class="hero-video-shell">
+                <div class="hero-video-frame">
+                    <video id="bgVideo" class="bg-video" autoplay muted loop playsinline preload="auto">
+                        <source src="assets/spiderverse-video.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <span class="video-chip">Earth-1610 Broadcast</span>
+                        <p class="video-caption">Background video and song are now playing from a local copy of the same track for reliable playback.</p>
+                        <div class="video-actions">
+                            <a class="video-link" href="assets/spiderverse-video.mp4" target="_blank" rel="noreferrer">Open Local Video</a>
+                            <p class="video-note" id="videoNote">This page now uses the downloaded local video file, so the in-page video and audio will work without YouTube embed errors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="vibe-meter-container">
+            <div class="vibe-meter-label">Vibe Meter</div>
+            <div class="vibe-meter" id="vibeMeter"></div>
+            <div class="vibe-meter-text" id="vibeMeterText">Scroll down and start the quiz.</div>
+        </div>
+
+        <header class="page-header" id="quizStart">
+            <h2 class="main-title">
+                <span class="title-text">What Is Your Spider-Verse Vibe?</span>
+                <span class="title-emoji">///</span>
+            </h2>
+            <p class="subtitle">Answer the questions, dodge the wrong timeline, and see where your energy lands.</p>
+        </header>
+
+        <div class="quiz-card">
+            <div class="question-card" id="q1">
+                <h2 class="question-text">1. What instantly upgrades your day?</h2>
+                <div class="options">
+                    <button class="option-btn" type="button" onclick="selectOption(1, 1, event)">
+                        <span class="option-emoji">Coffee</span>
+                        <span class="option-text">A perfect coffee or tea moment that fixes everything for five minutes.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(1, 2, event)">
+                        <span class="option-emoji">Music</span>
+                        <span class="option-text">That one song hitting at exactly the right time.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(1, 3, event)">
+                        <span class="option-emoji">Silence</span>
+                        <span class="option-text">Doing absolutely nothing and pretending life is under control.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Chaos</span>
+                        <span class="option-text">Running 5K at 5 AM because suffering builds character.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Sheets</span>
+                        <span class="option-text">Making spreadsheets for fun on a Saturday night.</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-card hidden" id="q2">
+                <h2 class="question-text">2. How do you reset after a long day?</h2>
+                <div class="options">
+                    <button class="option-btn" type="button" onclick="selectOption(2, 1, event)">
+                        <span class="option-emoji">Reset</span>
+                        <span class="option-text">Hot shower, cozy clothes, and no people for a while.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(2, 2, event)">
+                        <span class="option-emoji">Screen</span>
+                        <span class="option-text">Watching something chaotic while eating at the wrong hour.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(2, 3, event)">
+                        <span class="option-emoji">Text</span>
+                        <span class="option-text">Message one chaotic friend and let them derail the mood.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Books</span>
+                        <span class="option-text">Read 300 pages of philosophy and journal in Latin.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Monk</span>
+                        <span class="option-text">Meditate for four hours and transcend reality.</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-card hidden" id="q3">
+                <h2 class="question-text">3. What are you looking forward to after today?</h2>
+                <div class="options">
+                    <button class="option-btn" type="button" onclick="selectOption(3, 1, event)">
+                        <span class="option-emoji">Food</span>
+                        <span class="option-text">Something ridiculously good to eat.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(3, 2, event)">
+                        <span class="option-emoji">Peace</span>
+                        <span class="option-text">A room with no responsibilities and no notifications.</span>
+                    </button>
+                    <button class="option-btn" type="button" onclick="selectOption(3, 3, event)">
+                        <span class="option-emoji">Plot Twist</span>
+                        <span class="option-text">Something spontaneous and a little interesting.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Gym</span>
+                        <span class="option-text">A three hour gym session because pain is a hobby.</span>
+                    </button>
+                    <button class="option-btn fake-option" type="button" onclick="showBan(event)" tabindex="-1" aria-disabled="true">
+                        <span class="option-emoji">Laundry</span>
+                        <span class="option-text">Color-coding your sock drawer for fun.</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-card hidden" id="q4">
+                <h2 class="question-text">4. Final question. Want to hang out sometime?</h2>
+                <p class="no-warning" id="noWarning">The No button has severe Spider-Sense. Catch it if you can.</p>
+                <div class="no-joke-box hidden" id="noJokeBox" aria-live="polite"></div>
+                <div class="options final-options">
+                    <button class="option-btn yes-vibe" type="button" onclick="selectOption(4, 1, event)">
+                        <span class="option-emoji">Yes</span>
+                        <span class="option-text">Yes, absolutely.</span>
+                    </button>
+                    <button class="option-btn no-btn" id="noBtn" type="button" onmouseenter="moveNoButton(this)" onmousemove="moveNoButton(this)" onfocus="moveNoButton(this)" ontouchstart="moveNoButton(this)" onclick="rejectNo(event)">
+                        <span class="option-emoji">No</span>
+                        <span class="option-text">No</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="question-card hidden" id="messageBox">
+                <h2 class="question-text">Leave a little message</h2>
+                <textarea class="message-input" id="userMessage" placeholder="Say something cute, sarcastic, or both." rows="4"></textarea>
+                <button class="continue-btn" type="button" onclick="sendMessage()">Send Message</button>
+            </div>
+
+            <div class="question-card hidden" id="result">
+                <div class="result-content">
+                    <div class="vibe-crown" id="vibeCrown">WEB</div>
+                    <h2 class="result-title">Your vibe is</h2>
+                    <p class="result-text" id="resultText">Thoughtful Web-Slinger</p>
+                    <div class="result-description" id="resultDescription">
+                        <p>You find meaning in the tiny details.</p>
+                        <p>You balance softness, chaos, and good timing pretty well.</p>
+                        <p>Your best timeline includes strong music, low stress, and interesting company.</p>
+                    </div>
+                    <div class="aesthetic-quote-card">
+                        <div class="quote-icon">LOG</div>
+                        <p class="quote-text" id="quoteText">Not every hero wears a cape. Some just show up with good taste and impossible timing.</p>
+                        <div class="quote-decoration">Signal stable</div>
+                    </div>
+                    <button class="restart-btn" type="button" onclick="restartQuiz()">Take It Again</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Spider-Verse themed page with comic energy, warning labels, and one dangerous play button.</p>
+        </footer>
+
+        <section class="response-panel">
+            <div class="response-panel-header">
+                <div>
+                    <p class="response-kicker">Response Inbox</p>
+                    <h3 class="response-title">Saved User Responses</h3>
+                    <p class="response-help">Easiest setup: responses are saved in this browser using local storage. You can also export them as JSON.</p>
+                </div>
+                <div class="response-actions">
+                    <button class="secondary-btn" type="button" onclick="exportResponses()">Export JSON</button>
+                    <button class="secondary-btn danger-btn" type="button" onclick="clearResponses()">Clear All</button>
+                </div>
+            </div>
+            <div class="response-count" id="responseCount">0 saved responses</div>
+            <div class="response-list" id="responseList">
+                <p class="empty-responses">No responses yet. Once someone finishes the quiz, they will show up here.</p>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
