@@ -21,6 +21,32 @@
 
     <div class="ban-tooltip" id="banTooltip">Nope. Wrong timeline.</div>
 
+    <!-- Intro Slide -->
+    <div class="intro-slide" id="introSlide">
+        <div class="intro-content">
+            <div class="hanging-spider">
+                <div class="spider-web-line"></div>
+                <div class="spider-man">
+                    <div class="spider-body">
+                        <div class="spider-head"></div>
+                        <div class="spider-torso">
+                            <div class="spider-symbol"></div>
+                        </div>
+                        <div class="spider-arms left-arm"></div>
+                        <div class="spider-arms right-arm"></div>
+                        <div class="spider-legs left-legs"></div>
+                        <div class="spider-legs right-legs"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-message">
+                <h1 class="intro-title">Your Timeline Has Been Hacked</h1>
+                <p class="intro-subtitle">by <span class="hacker-name">Rudra</span></p>
+                <button class="proceed-btn" type="button" onclick="proceedToIntroEnd()">Proceed to Continue</button>
+            </div>
+        </div>
+    </div>
+
     <div class="music-section">
         <div class="music-player" id="musicPlayer">
             <div class="music-icon" id="musicIcon">SPDR</div>
@@ -161,6 +187,20 @@
                 <h2 class="question-text">4. Final question. Want to hang out sometime?</h2>
                 <p class="no-warning" id="noWarning">The No button has severe Spider-Sense. Catch it if you can.</p>
                 <div class="no-joke-box hidden" id="noJokeBox" aria-live="polite"></div>
+
+                <!-- Gwen Stacy Quote Video/Audio -->
+                <div class="gwen-quote-container hidden" id="gwenQuoteContainer">
+                    <div class="gwen-quote-video-shell">
+                        <video id="gwenQuoteVideo" class="gwen-quote-video" autoplay muted playsinline preload="auto">
+                            <source src="assets/gwen-quote.mp4" type="video/mp4">
+                        </video>
+                        <div class="gwen-quote-overlay">
+                            <p class="gwen-quote-text">"In every other universe, Gwen Stacy falls for Spider-Man. And in every other universe, it doesn't end well."</p>
+                            <p class="gwen-quote-text-2">"Well, there's a first time for everything. Right?"</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="options final-options">
                     <button class="option-btn yes-vibe" type="button" onclick="selectOption(4, 1, event)">
                         <span class="option-emoji">Yes</span>

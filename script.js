@@ -3,8 +3,10 @@ let selectedOptions = {};
 let banCursorTimeout = null;
 let isPlaying = false;
 let noEscapeCount = 0;
+let hasVisitedIntro = sessionStorage.getItem('spiderIntroVisited');
 const RESPONSE_STORAGE_KEY = 'spiderVerseQuizResponses';
 const VIDEO_URL = 'assets/spiderverse-video.mp4';
+const GWEN_QUOTE_VIDEO = 'assets/gwen-quote.mp4';
 const SPIDER_NO_LINES = [
     'Spider-Sense says that No was a canon event cancellation attempt.',
     'Miles just swung off with that button before you could click it.',
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeFakeOptions();
     initializeMediaState();
     initializeVideoPlayer();
+    initializeIntroSlide();
     renderResponses();
 });
 
@@ -90,6 +93,37 @@ function initializeFakeOptions() {
     });
 }
 
+function initializeIntroSlide() {
+    const introSlide = document.getElementById('introSlide');
+    if (!introSlide) return;
+
+    // Show intro only on first visit (session-based)
+    if (hasVisitedIntro) {
+        introSlide.classList.add('hidden');
+        setTimeout(() => introSlide.style.display = 'none', 800);
+    }
+}
+
+function proceedToIntroEnd() {
+    const introSlide = document.getElementById('introSlide');
+    if (!introSlide) return;
+
+    // Mark as visited for this session
+    sessionStorage.setItem('spiderIntroVisited', 'true');
+    hasVisitedIntro = true;
+
+    // Hide intro slide
+    introSlide.classList.add('hidden');
+    setTimeout(() => {
+        introSlide.style.display = 'none';
+        // Scroll to quiz start
+        const quizStart = document.getElementById('quizStart');
+        if (quizStart) {
+            quizStart.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 800);
+}
+
 function updateVibeMeter(questionNum) {
     const vibeMeter = document.getElementById('vibeMeter');
     const meterText = document.getElementById('vibeMeterText');
@@ -154,6 +188,29 @@ function nextQuestion(questionNum) {
     const nextId = typeof questionNum === 'number' ? `q${questionNum}` : questionNum;
     const nextCard = document.getElementById(nextId);
     if (nextCard) nextCard.classList.remove('hidden');
+
+    // Show Gwen quote video when reaching question 4
+    if (questionNum === 4) {
+        showGwenQuote();
+    }
+}
+
+function showGwenQuote() {
+    const gwenQuoteContainer = document.getElementById('gwenQuoteContainer');
+    const gwenQuoteVideo = document.getElementById('gwenQuoteVideo');
+
+    if (gwenQuoteContainer) {
+        gwenQuoteContainer.classList.remove('hidden');
+    }
+
+    if (gwenQuoteVideo) {
+        gwenQuoteVideo.muted = false;
+        gwenQuoteVideo.play().catch(() => {
+            // Auto-play might be blocked, user needs to interact first
+            gwenQuoteVideo.muted = true;
+            gwenQuoteVideo.play().catch(() => {});
+        });
+    }
 }
 
 function sendMessage() {
@@ -243,6 +300,15 @@ function restartQuiz() {
     if (noJokeBox) {
         noJokeBox.classList.add('hidden');
         noJokeBox.textContent = '';
+    }
+
+    // Hide Gwen quote container and pause video
+    const gwenQuoteContainer = document.getElementById('gwenQuoteContainer');
+    const gwenQuoteVideo = document.getElementById('gwenQuoteVideo');
+    if (gwenQuoteContainer) gwenQuoteContainer.classList.add('hidden');
+    if (gwenQuoteVideo) {
+        gwenQuoteVideo.pause();
+        gwenQuoteVideo.currentTime = 0;
     }
 
     document.body.classList.remove('show-ban-cursor');

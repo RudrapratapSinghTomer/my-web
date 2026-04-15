@@ -2,20 +2,21 @@
 
 ## Required Files:
 
-1. **spiderman.mp4** - Your Spider-Man video for background
+1. **spiderverse-video.mp4** ✅ (already present)
+   - Used for the hero section background video
+
+2. **gwen-quote.mp4** ⚠️ (ADD THIS)
+   - Download from: https://www.instagram.com/reel/C0Rx3YRhXuj/
+   - Contains the Gwen Stacy quote audio/video
+   - Quote: "In every other universe, Gwen Stacy falls for Spider-Man. And in every other universe, it doesn't end well." / "Well, there's a first time for everything. Right?"
    - Format: MP4
-   - Recommended: Short looping clip (5-15 seconds)
-   - Size: Keep under 10MB for best performance
+   - Place in this assets folder
+   - The video will auto-play when question 4 appears in the quiz
 
-2. **sunflower.mp3** - Your Sunflower music file
-   - Format: MP3
-   - Any quality works
-   - Recommended: Under 5MB
-
-## Where to Get Them:
-
-- Use your own legally obtained files
-- Or find royalty-free alternatives
+## How to Download Instagram Video:
+- Use a tool like: https://savefrom.net/ or similar Instagram video downloader
+- Paste the reel URL and download the video
+- Rename to `gwen-quote.mp4` and place in this folder
 
 ## After Adding Files:
 Delete this PLACEHOLDER.txt file (optional)

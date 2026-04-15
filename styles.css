@@ -760,6 +760,360 @@ body.show-ban-cursor * {
     }
 }
 
+/* =====================
+   INTRO SLIDE STYLES
+   ===================== */
+.intro-slide {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: radial-gradient(ellipse at center, #1a0a0a 0%, #0a0a0a 50%, #000000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro-slide.hidden {
+    opacity: 0;
+    transform: scale(1.1);
+    pointer-events: none;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+
+/* Hanging Spider-Man */
+.hanging-spider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.spider-web-line {
+    width: 2px;
+    height: 120px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent);
+    position: relative;
+}
+
+.spider-web-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.spider-man {
+    position: relative;
+    animation: hang 2s ease-in-out infinite;
+}
+
+.spider-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spider-head {
+    width: 50px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff304f 0%, #8b0000 100%);
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(255, 48, 79, 0.5);
+}
+
+.spider-head::before,
+.spider-head::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 25px;
+    background: white;
+    border-radius: 50% 50% 45% 45%;
+    top: 18px;
+}
+
+.spider-head::before {
+    left: 6px;
+    transform: rotate(-5deg);
+}
+
+.spider-head::after {
+    right: 6px;
+    transform: rotate(5deg);
+}
+
+.spider-head::before::after,
+.spider-head::after::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: #33a6ff;
+    border-radius: 50%;
+    top: 5px;
+    left: 4px;
+}
+
+.spider-torso {
+    width: 40px;
+    height: 55px;
+    background: linear-gradient(135deg, #ff304f 0%, #8b0000 50%, #1a1a2e 100%);
+    border-radius: 45% 45% 50% 50%;
+    margin-top: -5px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(255, 48, 79, 0.4);
+}
+
+.spider-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+}
+
+.spider-symbol::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #1a1a2e;
+    clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
+}
+
+.spider-arms {
+    position: absolute;
+    width: 35px;
+    height: 8px;
+    background: linear-gradient(90deg, #ff304f, #8b0000);
+    border-radius: 4px;
+    top: 8px;
+}
+
+.spider-arms.left-arm {
+    left: -30px;
+    transform: rotate(20deg);
+}
+
+.spider-arms.right-arm {
+    right: -30px;
+    transform: rotate(-20deg);
+}
+
+.spider-legs {
+    position: absolute;
+    width: 6px;
+    height: 45px;
+    background: linear-gradient(180deg, #ff304f, #1a1a2e);
+    border-radius: 3px;
+    bottom: -35px;
+}
+
+.spider-legs.left-legs {
+    left: 8px;
+    transform: rotate(15deg);
+}
+
+.spider-legs.left-legs::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 40px;
+    background: linear-gradient(180deg, #ff304f, #1a1a2e);
+    border-radius: 3px;
+    left: -8px;
+    top: 5px;
+    transform: rotate(-10deg);
+}
+
+.spider-legs.right-legs {
+    right: 8px;
+    transform: rotate(-15deg);
+}
+
+.spider-legs.right-legs::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 40px;
+    background: linear-gradient(180deg, #ff304f, #1a1a2e);
+    border-radius: 3px;
+    right: -8px;
+    top: 5px;
+    transform: rotate(10deg);
+}
+
+/* Intro Message */
+.intro-message {
+    text-align: center;
+    animation: fadeInUp 1s ease 0.5s both;
+}
+
+.intro-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: #ffd447;
+    text-shadow: 4px 4px 0 rgba(255, 48, 79, 0.9), -4px -4px 0 rgba(51, 166, 255, 0.9);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.intro-subtitle {
+    font-size: 1.4rem;
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.hacker-name {
+    color: #ff304f;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 48, 79, 0.6);
+}
+
+.proceed-btn {
+    padding: 16px 32px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, var(--red), #ff6a00);
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 12px 34px rgba(255, 48, 79, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.proceed-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(255, 48, 79, 0.45);
+}
+
+/* Gwen Quote Section */
+.gwen-quote-container {
+    margin: 20px auto;
+    max-width: 600px;
+    animation: quoteReveal 0.8s ease;
+}
+
+.gwen-quote-video-shell {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #05070d;
+    box-shadow: 0 20px 60px rgba(51, 166, 255, 0.3);
+    border: 1px solid rgba(51, 166, 255, 0.3);
+}
+
+.gwen-quote-video {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    display: block;
+    object-fit: cover;
+}
+
+.gwen-quote-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+}
+
+.gwen-quote-text,
+.gwen-quote-text-2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f7f7fb;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-style: italic;
+}
+
+.gwen-quote-text-2 {
+    margin-top: 12px;
+    color: #33a6ff;
+    font-weight: 500;
+}
+
+/* Animations */
+@keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+@keyframes hang {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes quoteReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    .hanging-spider {
+        transform: scale(0.8);
+    }
+
+    .spider-web-line {
+        height: 80px;
+    }
+
+    .intro-title {
+        font-size: 2rem;
+    }
+
+    .gwen-quote-video {
+        max-height: 250px;
+    }
+
+    .gwen-quote-text,
+    .gwen-quote-text-2 {
+        font-size: 0.95rem;
+    }
+}
+
 @media (max-width: 900px) {
     .hero-panel {
         grid-template-columns: 1fr;
